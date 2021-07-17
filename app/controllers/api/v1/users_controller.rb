@@ -1,4 +1,5 @@
-class UsersController < ApplicationController
+class Api::V1::UsersController < ApplicationController
+
   def index
     users = User.all
     render json: users
@@ -14,19 +15,18 @@ class UsersController < ApplicationController
   def create
     user = User.new(user_params)
     if user.save
-      render json: "User created successfully"
+      render json: {
+        status: :success,
+        message: "User created successfully"
+    }
     else
-      render json: "User can not be created"
+      render json: user.errors.to_a[0]
     end
   end
 
   def destroy 
     user = User.find(params[:id])
-    if user.destroy
-      render json: "User account deleted"
-    end
-    rescue ActiveRecord::RecordNotFound
-    render json: "There is no user with id: #{params[:id]}"
+    render json: "User account deleted" if user.destroy
   end
 
   private
