@@ -26,7 +26,7 @@ class Api::V1::UsersController < ApplicationController
 
   def destroy 
     user = User.find(params[:id])
-    render json: "User account deleted" if user.destroy
+    render json: { status: :no_content, message: "User account deleted" } if user.destroy
   end
 
   private
