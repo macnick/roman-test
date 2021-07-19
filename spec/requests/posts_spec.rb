@@ -23,6 +23,22 @@ RSpec.describe "Posts", type: :request do
       expect(response).to have_http_status(:success)
       expect(JSON.parse(response.body).size).to eq(2)
     end
+
+    it "returns a subset of posts depending on pagination" do
+      get "/api/v1/posts", params: { limit: 1 }
+      expect(response).to have_http_status(:success)
+      expect(JSON.parse(response.body).size).to eq(1)
+      expect(JSON.parse(response.body)).to eq([
+        {
+          "id": 1,
+          "title": "Test post 1",
+          "post_text": "This is the first test post text for testing",
+          "author": {
+            "id": 1,
+            "name": "Nick Haras"
+          }
+        }])
+    end
   end
 
   describe "POST /create post" do
