@@ -10,7 +10,8 @@ class Api::V1::PostsController < ApplicationController
     if post.save
       render json: {
         status: :success,
-        message: "Post created successfully"
+        message: "Post created successfully",
+        title: post.title
     }
     else
       render json: post.errors.to_a[0]
