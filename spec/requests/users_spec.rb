@@ -19,7 +19,7 @@ RSpec.describe "Users", type: :request do
   end
   
   describe "POST /create user" do
-    it "creates a new book" do
+    it "creates a new user" do
       expect {
         post "/api/v1/users", params: {first_name: "Jane",
                                         last_name: "Doe",
