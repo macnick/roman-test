@@ -10,7 +10,7 @@ RSpec.describe "Posts", type: :request do
   }
 
   describe "GET /index" do
-    it "return all posts" do
+    before do
       FactoryBot.create(:post, title: "Test post 1",
                               post_text: "This is the first test post text for testing",
                               user_id: user.id
@@ -19,25 +19,52 @@ RSpec.describe "Posts", type: :request do
                               post_text: "This is the second test post text for testing",
                               user_id: user.id
       )
+    end
+      
+
+    it "return all posts" do
       get "/api/v1/posts"
       expect(response).to have_http_status(:success)
       expect(JSON.parse(response.body).size).to eq(2)
     end
 
-    it "returns a subset of posts depending on pagination" do
+    it "returns a subset of posts based on limit" do
       get "/api/v1/posts", params: { limit: 1 }
+
       expect(response).to have_http_status(:success)
       expect(JSON.parse(response.body).size).to eq(1)
-      expect(JSON.parse(response.body)).to eq([
-        {
-          "id": 1,
-          "title": "Test post 1",
-          "post_text": "This is the first test post text for testing",
-          "author": {
-            "id": 1,
-            "name": "Nick Haras"
+      expect(JSON.parse(response.body)).to eq(
+        [
+          {
+            "id" => 1,
+            "title" => "Test post 1",
+            "post_text" => "This is the first test post text for testing",
+            "author" => {
+              "id" => 1,
+              "name" => "Nick Haras"
+            }
           }
-        }])
+        ]
+      )
+    end
+
+    it "returns a subset of posts based on limit and offset" do
+      get "/api/v1/posts", params: { limit: 1, offset: 1 }
+      expect(response).to have_http_status(:success)
+      expect(JSON.parse(response.body).size).to eq(1)
+      expect(JSON.parse(response.body)).to eq(
+        [
+          {
+            "id" => 2,
+            "title" => "Test post 2",
+            "post_text" => "This is the second test post text for testing",
+            "author" => {
+              "id" => 1,
+              "name" => "Nick Haras"
+            }
+          }
+        ]
+      )
     end
   end
 

@@ -1,6 +1,8 @@
 class Api::V1::PostsController < ApplicationController
+  MAX_PAGINATION_LIMIT = 5
+
   def index
-    posts = Post.all
+    posts = Post.all.limit(limit).offset(params[:offset])
     render json: PostsSerializer.new(posts).as_json
   end
 
@@ -31,5 +33,9 @@ class Api::V1::PostsController < ApplicationController
       :email,
       :password
     )
+  end
+
+  def limit
+    [params.fetch(:limit, MAX_PAGINATION_LIMIT).to_i, MAX_PAGINATION_LIMIT].min
   end
 end
