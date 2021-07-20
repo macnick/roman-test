@@ -35,14 +35,10 @@ Also support pagingation
 - Parameters: `{ title: string, post_text: string, user_id: integer, }`
 - Headers: `{ Authorization: 'Bearer ${token}'`
 
-[Up](#Table-of-Contents)
-
 ## Technologies Used
 
 - Ruby on Rails 6
 - JWT
-
-[Up](#Table-of-Contents)
 
 ## Setup and Run in Your Computer
 
@@ -51,15 +47,12 @@ Use your terminal and run the commands after each instruction.
 | Command                                               | Description                                      |
 | ----------------------------------------------------- | ------------------------------------------------ |
 | `git clone https://github.com/macnick/roman-test.git` | Clone the repository to you computer             |
-| `cd bookaduc-api`                                     | Navigate to the newly created folder             |
+| `cd roman-test`                                       | Navigate to the newly created folder             |
 | `bundle install`                                      | Install gem dependencies                         |
-| `rails db:create` followed by `rails db:migrate`      | Setup the database                               |
+| `rails db:migrate`                                    | Setup the database                               |
 | `rails server`                                        | Starts the development server                    |
 |                                                       | Press `Ctrl + c` to kill **http-server** process |
-| `rails db:seed`                                       | Fill the db with the required Bike data          |
 | `http://localhost:3000`                               | Visit this link in your browser to use it        |
-
-[Up](#Table-of-Contents)
 
 ## 👤 Author
 
