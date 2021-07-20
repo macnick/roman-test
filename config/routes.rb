@@ -1,3 +1,11 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root 'static#index'
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: [:index, :show, :create, :destroy]
+      resources :posts, only: [:index, :show, :create, :destroy]
+      resources :comments, only: [:index, :create, :destroy]
+      post 'authenticate', to: 'authentication#create'
+    end
+  end
 end
