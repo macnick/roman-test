@@ -42,7 +42,8 @@ RSpec.describe "Posts", type: :request do
             "author" => {
               "id" => 1,
               "name" => "Nick Haras"
-            }
+            },
+            "comments" => []
           }
         ]
       )
@@ -61,7 +62,8 @@ RSpec.describe "Posts", type: :request do
             "author" => {
               "id" => 1,
               "name" => "Nick Haras"
-            }
+            },
+            "comments" => []
           }
         ]
       )
